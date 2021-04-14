@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose")
+const routes = require("./routes")
 //Set up our PORT
 const PORT = process.env.PORT || 3001;
 //Set up express server
@@ -14,7 +15,7 @@ if(process.env.NODE_ENV === "production"){
     app.use(express.static("client/build"))
 }
 //Add our routes to the server
-
+app.use(routes);
 //Connect to db using mongoose
 mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/googlebooks",
 {
