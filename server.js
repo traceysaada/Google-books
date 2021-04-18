@@ -17,7 +17,7 @@ if(process.env.NODE_ENV === "production"){
 //Add our routes to the server
 app.use(routes);
 //Connect to db using mongoose
-mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/googlebooks",
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/googlebooks",
 {
     useCreateIndex: true,
     useNewUrlParser: true,
