@@ -1,20 +1,27 @@
 import React from 'react'
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
+import API from "../utils/ApiCalls"
+import BooksCards from "./BooksCards"
 
 class SavedBooks extends React.Component {
-state = {
-    books: [],
-  };
-  componentDidMount() {
-    return;
-  }
-  getDatabaseBooks = () => {
-    return;
-  };
-  deleteBookFromDatabase = (bookId) => {
-    return;
-  };
+    state = {
+        books: [],
+      };
+      componentDidMount() {
+        console.log("Saveds mounted")
+        this.getDatabaseBooks();
+      }
+      getDatabaseBooks = () => {
+        API.getAllSavedBooks().then(res => {
+          this.setState({
+            books: res.data
+          })
+        });
+      };
+      deleteBookFromDatabase = (bookId) => {
+        API.deleteBooks(bookId).then(() => this.getDatabaseBooks());
+      };
   render() {
       return (
     <Container fluid>
@@ -26,17 +33,40 @@ state = {
         </Jumbotron>
         </Col>
         </Row>
-        <Row>
-          <Col size="md-10 md-offset-1">
+        <Col size="md-10 md-offset-1">
             <article>
-              <h1>Book Title:</h1>
-              <p>BODY</p>
+              <h1>Book Titles that have been saved:</h1> 
             </article>
           </Col>
-          <button className="btn">View</button>
-            <button className="btn btn-danger">Remove</button> 
-          
-        </Row>
+        {this.state.books.length ? (
+          this.state.books.map((book) => (
+            <BooksCards
+            key={book.id}
+            title={book.title}
+            description={book.description}
+            // image={book.volumnInfo.imageLinks.thumbnail}
+            link={book.infoLink}
+            Button={() => (
+              <button
+              onClick={() => {
+                this.deleteBookFromDatabase(book.id);
+              }}
+              >
+           <Row>
+           <button className="btn btn-danger">Remove</button> 
+       </Row>
+              </button>
+            )}
+            />
+            ))
+        ) : (
+          <p>You have no books saved</p>
+        )}
+
+
+
+
+       
         </Container>
       )
   }
