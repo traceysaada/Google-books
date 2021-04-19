@@ -12,5 +12,8 @@ export default {
     //save a book to the db by sending an object with the model details
     saveBook: function(bookDetails){
         return axios.post("/api/books", bookDetails)
+    },
+    deleteBooks: function(id) {
+        return axios.delete("/api/books/" + id)
     }
 }
