@@ -38,7 +38,7 @@ class SearchPage extends React.Component {
   };
   handleSearch = (event) => {
     event.preventDefault();
-    
+
     this.getBooksFromGoogleAPI();
   };
   render() {
@@ -59,43 +59,40 @@ class SearchPage extends React.Component {
             />
           </Row>
           <article>
-                <h1>Search by Book Title</h1>
-              </article>
+            <h1>Search by Book Title</h1>
+          </article>
           {this.state.books.length ? (
-          this.state.books.map((book) => (
-            <BooksCards
-            key={book.id}
-            title={book.volumeInfo.title}
-            description={book.volumeInfo.description}
-            // image={book.volumnInfo.imageLinks.thumbnail}
-            link={book.volumeInfo.infoLink}
-            Button={() => (
-              <button
-              onClick={() => {
-                this.saveBookFromDatabase(book.id);
-              }}
-              >
-              <Row>
-            <Col size="md-10 md-offset-1">
-            </Col>
-            <button className="btn">View</button>
-
-          </Row>
-          <Row>
-            <Col size="md-10 md-offset-1">
-            </Col>
-            <button className="btn">Save as Favourite</button>
-          </Row>
-              </button>
-            )}
-            />
+            this.state.books.map((book) => (
+              <BooksCards
+                key={book.id}
+                title={book.volumeInfo.title}
+                description={book.volumeInfo.description}
+                // image={book.volumnInfo.imageLinks.thumbnail}
+                link={book.volumeInfo.infoLink}
+                Button={() => (
+                  <button
+                    onClick={() => {
+                      this.saveBookFromDatabase(book.id);
+                    }}
+                  >
+                    <Row>
+                      <Col size="md-10 md-offset-1"></Col>
+                      <button className="btn">View</button>
+                    </Row>
+                    <Row>
+                      <Col size="md-10 md-offset-1"></Col>
+                      <button className="btn">Save as Favourite</button>
+                    </Row>
+                  </button>
+                )}
+              />
             ))
-            
-        ) : (
-            
-          <p>When you search for a book you can click the button to view or save to list</p>
-        )}
-          
+          ) : (
+            <p>
+              When you search for a book you can click the button to view or
+              save to list
+            </p>
+          )}
         </Container>
       </>
     );
