@@ -11,9 +11,11 @@ class SavedBooks extends React.Component {
       componentDidMount() {
         console.log("Saveds mounted")
         this.getDatabaseBooks();
+        console.log(this.state.books)
       }
       getDatabaseBooks = () => {
         API.getAllSavedBooks().then(res => {
+          console.log(res)
           this.setState({
             books: res.data
           })
@@ -40,8 +42,9 @@ class SavedBooks extends React.Component {
           </Col>
         {this.state.books.length ? (
           this.state.books.map((book) => (
+            
             <BooksCards
-            key={book.id}
+            key={book._id}
             title={book.title}
             description={book.description}
             // image={book.volumnInfo.imageLinks.thumbnail}
@@ -49,7 +52,7 @@ class SavedBooks extends React.Component {
             Button={() => (
               <button
               onClick={() => {
-                this.deleteBookFromDatabase(book.id);
+                this.deleteBookFromDatabase(book._id);
               }}
               >
            <Row>
