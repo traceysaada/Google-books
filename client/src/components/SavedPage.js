@@ -46,18 +46,17 @@ class SavedBooks extends React.Component {
             <BooksCards
             key={book._id}
             title={book.title}
+            authors={book.authors}
             description={book.description}
-            // image={book.volumnInfo.imageLinks.thumbnail}
-            link={book.infoLink}
+            image={book.image}
+            link={book.link}
             Button={() => (
-              <button
+              <button className="btn btn-danger"
               onClick={() => {
                 this.deleteBookFromDatabase(book._id);
               }}
               >
-           <Row>
-           <button className="btn btn-danger">Remove</button> 
-       </Row>
+         Remove
               </button>
             )}
             />

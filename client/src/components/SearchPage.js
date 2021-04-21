@@ -31,7 +31,7 @@ class SearchPage extends React.Component {
       googleId: book.id,
       title: book.volumeInfo.title,
       description: book.volumeInfo.description,
-      image: "image placeholder",
+      image: book.volumeInfo.imageLinks.thumbnail,
       authors: book.volumeInfo.authors,
       link: book.volumeInfo.infoLink,
     }).then(() => this.getBooksFromGoogleAPI());
@@ -58,31 +58,23 @@ class SearchPage extends React.Component {
               handleUserInput={this.handleUserInput}
             />
           </Row>
-          <article>
-            <h1>Search by Book Title</h1>
-          </article>
+        
           {this.state.books.length ? (
             this.state.books.map((book) => (
               <BooksCards
                 key={book.id}
                 title={book.volumeInfo.title}
+                authors={book.volumeInfo.authors.join(", ")}
                 description={book.volumeInfo.description}
-                // image={book.volumnInfo.imageLinks.thumbnail}
+                image={book.volumeInfo.imageLinks.thumbnail}
                 link={book.volumeInfo.infoLink}
                 Button={() => (
-                  <button
+                  <button className="btn"
                     onClick={() => {
                       this.saveBookFromDatabase(book.id);
                     }}
                   >
-                    <Row>
-                      <Col size="md-10 md-offset-1"></Col>
-                      <button className="btn">View</button>
-                    </Row>
-                    <Row>
-                      <Col size="md-10 md-offset-1"></Col>
-                      <button className="btn">Save as Favourite</button>
-                    </Row>
+                   Save as favourite
                   </button>
                 )}
               />
