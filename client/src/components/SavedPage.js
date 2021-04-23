@@ -58,6 +58,7 @@ class SavedBooks extends React.Component {
               >
          Remove
               </button>
+              
             )}
             />
             ))
