@@ -3,6 +3,7 @@ import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 import UserSearch from "./UserSearch";
 import API from "../utils/ApiCalls";
+import background from "../styles/Images/book-background.webp";
 
 import BooksCards from "./BooksCards";
 
@@ -58,7 +59,7 @@ class SearchPage extends React.Component {
               handleUserInput={this.handleUserInput}
             />
           </Row>
-        
+
           {this.state.books.length ? (
             this.state.books.map((book) => (
               <BooksCards
@@ -69,12 +70,13 @@ class SearchPage extends React.Component {
                 image={book.volumeInfo.imageLinks.thumbnail}
                 link={book.volumeInfo.infoLink}
                 Button={() => (
-                  <button className="btn"
+                  <button
+                    className="btn"
                     onClick={() => {
                       this.saveBookFromDatabase(book.id);
                     }}
                   >
-                   Save as favourite
+                    Save as favourite
                   </button>
                 )}
               />
@@ -85,6 +87,9 @@ class SearchPage extends React.Component {
               save to list
             </p>
           )}
+          <div className="image">
+            <img src={background} alt="background"></img>
+          </div>
         </Container>
       </>
     );
